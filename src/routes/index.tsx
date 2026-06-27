@@ -83,7 +83,7 @@ function App() {
 
         </div>
 
-        <div className='glass rounded-3xl p-6 md:p-8 space-y-6 text-2xl'>
+        <div className='glass rounded-3xl p-6 md:p-8 space-y-6 text-2xl mx-2'>
           <div className='space-y-4'>
              <Textarea
               placeholder="Describe your presentation topic, paste your notes, or outline your key points..."

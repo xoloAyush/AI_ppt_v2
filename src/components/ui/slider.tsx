@@ -5,6 +5,9 @@ import { Slider as SliderPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a styled Radix slider with support for multiple thumbs.
+ */
 function Slider({
   className,
   defaultValue,

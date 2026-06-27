@@ -21,7 +21,7 @@
   --primary-soft: #EEF9D7;
 
   /* Backgrounds */
-  --bg-base: rgb(218, 221, 215);
+  --bg-base: rgb(255, 255, 255);
   --surface: rgba(255,255,255,.82);
   --surface-strong: rgba(255,255,255,.95);
   --header-bg: rgba(248,249,247,.72);
@@ -37,8 +37,8 @@
   --chip-line: rgba(0,0,0,.08);
 
   /* Organic Background */
-  --hero-a: rgba(155,229,60,.18);
-  --hero-b: rgba(175,236,98,.12);
+  --hero-a: rgba(123, 172, 58, 0.218);
+  --hero-b: rgba(41, 69, 8, 0.12);
   --hero-c: rgba(255,255,255,.6);
 
   /* Shadows */
@@ -181,8 +181,8 @@ body {
   font-family: var(--font-sans);
 
   background:
-    radial-gradient(circle at 0% 0%, var(--hero-a), transparent 35%),
-    radial-gradient(circle at 100% 0%, var(--hero-b), transparent 35%),
+    radial-gradient(circle at 0% 0%, var(--hero-a), transparent 25%),
+    radial-gradient(circle at 100% 0%, var(--hero-b), transparent 25%),
     radial-gradient(circle at 50% 100%, var(--hero-c), transparent 35%),
     linear-gradient(
       180deg,
@@ -228,6 +228,30 @@ body::after {
     linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
   background-size: 28px 28px;
   mask-image: radial-gradient(circle at 50% 30%, black, transparent 78%);
+}
+
+.glass {
+  background: rgba(227, 232, 226, 0.615);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(109, 102, 102, 0.18);
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+  transition: all 0.3s ease;
+}
+
+.dark .glass {
+  background: rgba(21, 43, 15, 0.45);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 a {
@@ -554,7 +578,7 @@ pre code {
   background: color-mix(in oklab, var(--primary) 8%, transparent);
 }
 
-button,
+/* button, */
 /* .island-shell, */
 a {
   transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease,

@@ -1,13 +1,30 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 import Login from '../../components/auth/login-form'
 import { Presentation } from 'lucide-react';
 import { z } from "zod";
+import { authMiddleware } from '#/middleware/auth';
+import { getSession } from '#/lib/auth-function';
 
 const loginSearchSchema = z.object({
   redirect: z.string().optional().default("/"),
 });
 
 export const Route = createFileRoute("/_auth/login")({
+  server:{
+     middleware: [authMiddleware],
+  },
+  // beforeLoad: async ({location}) => {
+  //     const session = await getSession();
+  
+  //     if (session) {
+  //       throw redirect({
+  //         to: "/",
+  //         search:{redirect:location.href}
+  //       });
+  //     }
+  
+  //     return { session };
+  //   },
   validateSearch: loginSearchSchema,
   component: LoginPage,
 });

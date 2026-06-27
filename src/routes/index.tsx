@@ -57,6 +57,9 @@ export const Route = createFileRoute('/')({
 
 })
 
+/**
+ * Renders the presentation generation home page.
+ */
 function App() {
 
   // const data = authClient.getSession()

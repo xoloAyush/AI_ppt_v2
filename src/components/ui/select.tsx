@@ -6,12 +6,22 @@ import { Select as SelectPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { IconSelector, IconCheck, IconChevronUp, IconChevronDown } from "@tabler/icons-react"
 
+/**
+ * Wraps the root Select primitive.
+ *
+ * @returns The rendered select root.
+ */
 function Select({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Root>) {
   return <SelectPrimitive.Root data-slot="select" {...props} />
 }
 
+/**
+ * Groups related select items.
+ *
+ * @param className - Additional classes to apply to the group
+ */
 function SelectGroup({
   className,
   ...props
@@ -25,12 +35,24 @@ function SelectGroup({
   )
 }
 
+/**
+ * Displays the selected value.
+ *
+ * @param props - Props forwarded to the underlying select value element.
+ */
 function SelectValue({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Value>) {
   return <SelectPrimitive.Value data-slot="select-value" {...props} />
 }
 
+/**
+ * Displays the select trigger with a dropdown icon.
+ *
+ * @param className - Additional classes to apply to the trigger
+ * @param size - The trigger height variant
+ * @returns The select trigger element
+ */
 function SelectTrigger({
   className,
   size = "default",
@@ -57,6 +79,14 @@ function SelectTrigger({
   )
 }
 
+/**
+ * Renders the select menu content in a portal with standardized styling and scroll controls.
+ *
+ * @param className - Additional classes to apply to the content
+ * @param children - Menu items rendered inside the viewport
+ *
+ * @returns The select content element
+ */
 function SelectContent({
   className,
   children,
@@ -95,6 +125,11 @@ function SelectContent({
   )
 }
 
+/**
+ * Labels a select section or group.
+ *
+ * @param className - Additional classes to merge with the default label styling
+ */
 function SelectLabel({
   className,
   ...props
@@ -108,6 +143,11 @@ function SelectLabel({
   )
 }
 
+/**
+ * Renders a selectable option with a checkmark indicator.
+ *
+ * @param children - The item label content
+ */
 function SelectItem({
   className,
   children,
@@ -132,6 +172,11 @@ function SelectItem({
   )
 }
 
+/**
+ * Renders a separator between select items.
+ *
+ * @param className - Additional CSS classes to apply
+ */
 function SelectSeparator({
   className,
   ...props
@@ -145,6 +190,11 @@ function SelectSeparator({
   )
 }
 
+/**
+ * Displays the select dropdown's scroll-up control.
+ *
+ * @param className - Additional classes to apply to the button
+ */
 function SelectScrollUpButton({
   className,
   ...props
@@ -164,6 +214,11 @@ function SelectScrollUpButton({
   )
 }
 
+/**
+ * Displays the downward scroll control for the select menu.
+ *
+ * @param className - Additional classes to merge with the default styling
+ */
 function SelectScrollDownButton({
   className,
   ...props

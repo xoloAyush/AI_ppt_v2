@@ -5,6 +5,11 @@ import { Label as LabelPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a styled form label.
+ *
+ * @param className - Additional classes to merge with the default label styles
+ */
 function Label({
   className,
   ...props

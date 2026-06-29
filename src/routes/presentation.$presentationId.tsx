@@ -94,6 +94,8 @@ function PresentationDetailPage() {
     onDeleted: () => navigate({ to: '/' }),
   })
 
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",query)
+
   // const { isFullscreen, toggleFullscreen } = useFullscreen(
   //   'slide-preview-container',
   // )

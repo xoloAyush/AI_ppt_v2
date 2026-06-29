@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useState } from 'react'
 // import { getSession } from '#/lib/auth-function';
 import { authMiddleware } from '#/middleware/auth';
@@ -10,6 +10,7 @@ import type {
 } from '#/features/presentations/constants/presentation-options'
 
 import { PRESENTATION_TEMPLATES } from '#/features/presentations/constants/presentation-templates'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import {
   SLIDE_STYLES,
@@ -28,6 +29,10 @@ import { Slider } from '#/components/ui/slider';
 import { Label } from '#/components/ui/label';
 import { Button } from '#/components/ui/button';
 import { Wand2 } from 'lucide-react';
+import { createPresentation } from '#/features/presentations/actions/presentation-mutations';
+import { toast } from 'sonner';
+// import { queryKeys } from 'inngest';
+import { presentationQueryKeys } from '#/features/presentations/hooks/query-keys';
 
 type HomeFormState = {
   content: string
@@ -70,6 +75,49 @@ function App() {
     layout: 'balanced',
   })
 
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
+
+  const createMut = useMutation({
+    mutationFn: ()=> createPresentation({
+      data:{
+        prompt : form.content.trim(),
+         slideCount: form.slideCount,
+          style: form.style,
+          tone: form.tone,
+          layout: form.layout,
+      },
+    }),
+    onSuccess: (presentation)=>{
+      toast.success('Presentation created')
+      queryClient.invalidateQueries({
+        queryKey: presentationQueryKeys.list()
+      })
+      navigate({
+        to: '/presentation/$presentationId',
+        params: {presentationId: presentation.id}
+      })
+    },
+    onError: (error) => {
+      toast.error(`Could not create presentation: ${error}`)
+
+      console.log(error)
+    }
+  })
+
+  const handleCreate = () => {
+  console.log("Button clicked");
+
+  if (!form.content.trim()) {
+    toast.error("Empty");
+    return;
+  }
+
+  console.log("Calling mutate");
+
+  createMut.mutate();
+};
+
   
   return (
     <div className=' h-min-screen text-center mt-30 mb-10 overflow-x-hidden'>
@@ -83,7 +131,7 @@ function App() {
 
         </div>
 
-        <div className='glass rounded-3xl p-6 md:p-8 space-y-6 text-2xl'>
+        <div className='glass rounded-3xl p-6 md:p-8 space-y-6 text-2xl mx-2'>
           <div className='space-y-4'>
              <Textarea
               placeholder="Describe your presentation topic, paste your notes, or outline your key points..."
@@ -202,7 +250,8 @@ function App() {
             <div className='flex justify-end pt-2'>
               <Button 
               size={'lg'}
-              onClick={()=>{}}
+              onClick={()=>{handleCreate()}}
+              disabled={createMut.isPending || !form.content.trim()}
               className='rounded-xl px-8 gap-2 font-semibold text-base'>
                 <Wand2 className='size-5'/>
                 Generate PPT
